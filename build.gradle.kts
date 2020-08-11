@@ -1,5 +1,5 @@
 plugins {
-    id("org.jetbrains.kotlin.js") version "1.3.72"
+    id("org.jetbrains.kotlin.js") version "1.4.0-rc"
 }
 
 group = "org.example"
@@ -12,28 +12,49 @@ repositories {
     jcenter()
 }
 
-dependencies {
-    implementation(kotlin("stdlib-js"))
 
-    //React, React DOM + Wrappers (chapter 3)
-    implementation("org.jetbrains:kotlin-react:16.13.1-pre.110-kotlin-1.3.72")
-    implementation("org.jetbrains:kotlin-react-dom:16.13.1-pre.110-kotlin-1.3.72")
-    implementation(npm("react", "16.13.1"))
-    implementation(npm("react-dom", "16.13.1"))
 
-    //Kotlin Styled (chapter 3)
-    implementation("org.jetbrains:kotlin-styled:1.0.0-pre.110-kotlin-1.3.72")
-    implementation(npm("styled-components"))
-    implementation(npm("inline-style-prefixer"))
+kotlin {
+    js {
+        binaries.executable()
 
-    //Video Player (chapter 7)
-    implementation(npm("react-player"))
+        browser {}
+    }
 
-    //Share Buttons (chapter 7)
-    implementation(npm("react-share"))
+    sourceSets {
+        val main by getting {
+            kotlin.srcDir("src/main/kotlin")
+            dependencies {
+                implementation(kotlin("stdlib-js"))
 
-    //Coroutines (chapter 8)
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.3.5")
+                //React, React DOM + Wrappers (chapter 3)
+                implementation("org.jetbrains:kotlin-react:16.13.1-pre.110-kotlin-1.4.0-rc")
+                implementation("org.jetbrains:kotlin-react-dom:16.13.1-pre.110-kotlin-1.4.0-rc")
+                implementation(npm("react", "16.13.1"))
+                implementation(npm("react-dom", "16.13.1"))
+
+                //Kotlin Styled (chapter 3)
+                implementation("org.jetbrains:kotlin-styled:1.0.0-pre.110-kotlin-1.4.0-rc")
+                implementation(npm("styled-components", "5.1.1"))
+                implementation(npm("inline-style-prefixer", "6.0.0"))
+
+                //Video Player (chapter 7)
+                implementation(npm("react-player", "2.6.0"))
+
+                //Share Buttons (chapter 7)
+                implementation(npm("react-share", "4.2.1"))
+
+                //Coroutines (chapter 8)
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:1.3.8-1.4.0-rc")
+            }
+        }
+    }
 }
 
-kotlin.target.browser { }
+
+//tasks.withType<org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile>().all {
+//    kotlinOptions.freeCompilerArgs += "-Xir-per-module"
+//    kotlinOptions.freeCompilerArgs += "-Xir-loaded-lazily=<org.jetbrains.kotlinx:kotlinx-coroutines-core>"
+//    kotlinOptions.moduleKind = "commonjs"
+//}
+
