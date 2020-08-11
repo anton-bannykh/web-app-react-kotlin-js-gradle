@@ -3,6 +3,12 @@ import kotlin.browser.window
 import react.*
 import react.dom.*
 
+external interface Video {
+    val id: Int
+    val title: String
+    val speaker: String
+    val videoUrl: String
+}
 
 external interface VideoListProps: RProps {
     var videos: List<Video>
@@ -30,6 +36,7 @@ class VideoList: RComponent<VideoListProps, RState>() {
 }
 
 fun RBuilder.videoList(handler: VideoListProps.() -> Unit): ReactElement {
+    if (false) VideoList()
     return child(VideoList::class) {
         this.attrs(handler)
     }

@@ -1,11 +1,14 @@
 pluginManagement {
     repositories {
-        maven { setUrl("https://dl.bintray.com/kotlin/kotlin-eap") }
-
+        maven(url = "https://dl.bintray.com/kotlin/kotlin-eap")
+        maven(url = "https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev")
+        mavenLocal()
+        gradlePluginPortal()
         mavenCentral()
-
-        maven { setUrl("https://plugins.gradle.org/m2/") }
     }
 }
+
 rootProject.name = "confexplorer"
 
+include("player")
+include("app")

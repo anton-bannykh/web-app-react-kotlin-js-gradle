@@ -1,7 +1,5 @@
 plugins {
-//    kotlin("js") version "1.4.255-SNAPSHOT"
-    kotlin("js") version "1.4.20-dev-3529"
-//    id("org.jetbrains.kotlin.js") version "1.4.0-rc"
+    kotlin("js")
 }
 
 group = "org.example"
@@ -16,17 +14,8 @@ repositories {
     mavenLocal()
 }
 
-tasks {
-    wrapper {
-        distributionType = Wrapper.DistributionType.ALL
-        gradleVersion = "6.1.1"
-    }
-}
-
 kotlin {
     js {
-        binaries.executable()
-
         browser {}
     }
 
@@ -36,10 +25,14 @@ kotlin {
             dependencies {
                 implementation(kotlin("stdlib-js"))
 
-                // React app
-                implementation(project(":app"))
+                // Player
+                implementation(project(":player"))
 
-                implementation("org.jetbrains.kotlinx:kotlinx-html-js:0.7.1-1.4.0-rc")
+                //React, React DOM + Wrappers (chapter 3)
+                implementation("org.jetbrains:kotlin-react:16.13.1-pre.110-kotlin-1.4.0-rc")
+                implementation("org.jetbrains:kotlin-react-dom:16.13.1-pre.110-kotlin-1.4.0-rc")
+                implementation(npm("react", "16.13.1"))
+                implementation(npm("react-dom", "16.13.1"))
             }
         }
     }
@@ -47,7 +40,6 @@ kotlin {
 
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile>().all {
-    kotlinOptions.freeCompilerArgs += "-Xir-per-module"
-    kotlinOptions.freeCompilerArgs += "-Xir-loaded-lazily=<org.example:app>"
+    kotlinOptions.freeCompilerArgs += "-Xir-loaded-lazily=<org.example:player>"
+    kotlinOptions.moduleKind = "commonjs"
 }
-
