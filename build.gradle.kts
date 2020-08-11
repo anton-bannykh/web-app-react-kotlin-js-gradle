@@ -1,5 +1,6 @@
 plugins {
-    id("org.jetbrains.kotlin.js") version "1.4.0-rc"
+    kotlin("js") version "1.4.254-SNAPSHOT"
+//    id("org.jetbrains.kotlin.js") version "1.4.0-rc"
 }
 
 group = "org.example"
@@ -10,9 +11,15 @@ repositories {
     maven("https://kotlin.bintray.com/kotlin-js-wrappers/")
     mavenCentral()
     jcenter()
+    mavenLocal()
 }
 
-
+tasks {
+    wrapper {
+        distributionType = Wrapper.DistributionType.ALL
+        gradleVersion = "6.1.1"
+    }
+}
 
 kotlin {
     js {

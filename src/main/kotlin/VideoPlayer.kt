@@ -58,7 +58,7 @@ class VideoPlayer(props: VideoPlayerProps) : RComponent<VideoPlayerProps, RState
                     }
                 }
             }
-            reactPlayer {
+            ReactPlayer.default {
                 attrs.url = props.video.videoUrl
             }
         }
