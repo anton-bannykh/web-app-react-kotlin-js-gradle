@@ -11,6 +11,12 @@ external interface Video {
 }
 
 fun main() {
+    if (false) {
+        App()
+        VideoPlayer(null!!)
+        VideoList()
+    }
+
     render(document.getElementById("root")) {
         child(App::class) {}
     }
