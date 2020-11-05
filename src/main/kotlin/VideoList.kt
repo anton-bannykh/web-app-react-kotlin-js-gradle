@@ -12,7 +12,8 @@ external interface VideoListProps: RProps {
 
 class VideoList: RComponent<VideoListProps, RState>() {
     override fun RBuilder.render() {
-        for (video in props.videos) {
+        val videos = props.videos
+        for (video in videos) {
             p {
                 key = video.id.toString()
                 attrs {
